@@ -9,14 +9,15 @@ import CartDropDown from '../cart-dropdown/cart-dropdown.com'
 import CartIcon from '../cart-Icon/cart-Icon.comp'
 import { ReactComponent as Logo } from '../Assets/crown.svg';
 import { auth } from '../../firebase/firebase.utils';
+import { HeaderContainer, LogoContainer, OptionContainer } from './Header.styles';
 import './Header.scss';
 
 const Header = ({currentUser, hidden}) => (
-  <div className="header">
-    <Link className="logo-container" to="/">
+  <HeaderContainer>
+    <LogoContainer className="logo-container" to="/">
       <Logo className="logo" />
-    </Link>
-    <div className="options">
+    </LogoContainer>
+    <OptionContainer className="options">
       <Link className="option" to="/shop">
         SHOP
       </Link>
@@ -26,7 +27,6 @@ const Header = ({currentUser, hidden}) => (
 
       {currentUser ? (
         <div className="option" onClick={() => auth.signOut()}>
-          {' '}
           SIGN OUT
         </div>
       ) : (
@@ -35,12 +35,12 @@ const Header = ({currentUser, hidden}) => (
         </Link>
       )}
       <CartIcon/>
-    </div>
+    </OptionContainer>
     {
       hidden ? null :
     <CartDropDown />
     }
-  </div>
+  </HeaderContainer>
 );
 
 const mapStateToProps = createStructuredSelector ({
